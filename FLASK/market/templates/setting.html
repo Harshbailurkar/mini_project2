@@ -1,0 +1,176 @@
+{% extends 'base.html' %} {% block title %} Settings {% endblock %} {% block
+content %}
+
+</head>
+
+<body style="background-color: rgba(0, 0, 0, 0.36); color: white;
+text-decoration: none;">
+  <div style=" display: flex;">
+    <br><br>
+    <div class="container1">
+      <br>
+      <div class="box">
+        <!-- Profile section -->
+        <h5> <a class=" nav-link" href=" {{url_for('profile_page' )}}">Profile</a> </h5>
+        <!-- Add your content for the profile section here -->
+      </div>
+      <div class="box">
+        <!-- Appearance section -->
+        <h5><a class="nav-link" href="#">Appearance</a> </h5>
+        <!-- Add your content for the appearance section here -->
+      </div>
+      <div class="box">
+        <!-- Language and phone section -->
+        <h5> <a class="nav-link" href="#">Language &amp; Phone</a> </h5>
+        <!-- Add your content for the language and phone section here -->
+      </div>
+      <div class="box">
+        <!-- About this site section -->
+        <h5><a class="nav-link" href="{{url_for('about_page')}}">How to Order</a> </h5>
+        <!-- Add your content for the about this site section here -->
+      </div>
+      <div class="box">
+        <!-- Order history section -->
+        <h5><a class="nav-link" href="{{url_for('history_page')}}">Order history</a> </h5>
+        <!-- Add your content for the order history section here -->
+      </div>
+      <div class="box">
+        <!-- Order history section -->
+        <h5><a class="nav-link" href="{{ url_for('logout_page') }}">Log out</a> </h5>
+        <!-- Add your content for the order history section here -->
+      </div>
+      <div class="box">
+        <!-- Order history section -->
+        <h5><a class="nav-link" href="#"> Download page</a></h5>
+        <!-- Add your content for the order history section here -->
+      </div>
+      <div class="box">
+        <!-- Order history section -->
+        <h5> <a class="nav-link" href="#">add as Extension</a> </h5>
+        <!-- Add your content for the order history section here -->
+      </div>
+      <div class="box">
+        <!-- Order history section -->
+        <h5><a class="nav-link" href="#"> About SITCOE</a></h5>
+        <!-- Add your content for the order history section here -->
+      </div>
+      <div class="box">
+        <!-- Order history section -->
+        <h5><a class="nav-link" href="#">contact Cafeteria</a> </h5>
+        <!-- Add your content for the order history section here -->
+      </div>
+    </div>
+
+
+    <div style="margin-top: 10px;">
+      <h3 style="color: black; display: inline; margin-bottom: 10px; font-weight: bolder;"> Your Profile</h3> <br>
+      <br>
+      <div class="container" style="background-color: rgb(27, 27, 27);">
+
+        <img class="avatar"
+          src="https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png"
+          alt="Avatar">
+        <div class="profile-info">
+          <p>UserName: {{current_user.username}}</p>
+          <p>Email:</p>
+          <div class="sync-status">
+            <svg><!-- Sync status icon --></svg>
+            <p> <img
+                src="https://p7.hiclipart.com/preview/620/17/242/computer-icons-check-mark-clip-art-random-buttons.jpg"
+                alt="img" style="height: 10px; width: 10px; border-radius: 50%;"> Logged in</p>
+          </div>
+        </div>
+        <a class="action-button" href="{{ url_for('logout_page') }}"> Sign Out</a>
+
+      </div>
+    </div>
+  </div>
+</body>
+<style>
+  h5 {
+    color: white;
+  }
+
+  /* Container for the column layout */
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Align items to the left */
+    border: none;
+    width: 15vw;
+    background-color: rgb(27, 27, 27);
+    color: white;
+    text-decoration: none;
+
+  }
+
+  /* Each section as a separate box */
+  .box {
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 15cm;
+    height: 5cm;
+    margin-top: 0px;
+    margin-left: 30%;
+  }
+
+  .avatar {
+    width: 3cm;
+    height: 3cm;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .profile-info {
+    margin-left: 16px;
+  }
+
+  .profile-info p {
+    margin: 0;
+  }
+
+  .sync-status {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .sync-status svg {
+    width: 16px;
+    height: 16px;
+    fill: #888;
+    margin-right: 4px;
+  }
+
+  .overflow-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    text-decoration: none;
+  }
+
+  .action-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+</style>
+
+{%endblock%}

@@ -1,0 +1,12 @@
+td {
+    height: 80px;
+    width: 160px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+  }

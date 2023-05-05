@@ -1,0 +1,66 @@
+#     # Retrieve the order data from the request object
+#     order_items = request.form.getlist('order_item[]')
+#     total_amount =float( request.form['table2_total'])
+#     username = current_user.username
+#     order_id = generate_order_id()
+
+#     # Validate the order data
+#     if not order_items:
+#         return jsonify({'error': 'No items in order'})
+
+#      #Loop through order_items and create Order objects
+#    #Loop through order_items and create Order objects
+#     for order_item in order_items:
+#     # Extract order item data (e.g., name, quantity, price)
+#     # and create Order object
+#          name = order_item.get('Name')
+#          quantity = int(order_item.get('quantity'))
+#          price = float(order_item.get('price'))
+#          total_amount = float(request.form.get('table2_total'))
+#          order = Orders(
+#          username=username, order_id=order_id, name=name, quantity=quantity, price=price, Totalprice=total_amount)
+#     # Add order object to the database session
+#          db.session.add(order)
+
+# # Commit the changes to the database
+#     db.session.commit()
+
+
+#     # Store total amount in the database or do other processing as needed
+#     # ...
+
+#     return render_template('success.html', order_id=order_id)
+
+#@app.route('/submit_order', methods=['POST'])
+# def submit_order():
+#     # Retrieve order data from form
+#     order_items = request.form.getlist('order_item[]')
+#     total_amount = request.form['table2_total']
+
+#     # Loop through order_items and create Order objects
+#     for order_item in order_items:
+#         # Extract order item data (e.g., name, quantity, price)
+#         # and create Order object
+#         order = Order(
+#             name=order_item['name'], quantity=order_item['quantity'], price=order_item['price'])
+#         # Add order object to the database session
+#         db.session.add(order)
+
+#     # Commit the changes to the database
+#     db.session.commit()
+
+#     # Store total amount in the database or do other processing as needed
+#     # ...
+
+#     # Redirect to a success page or return a response
+#     return "Order submitted successfully"
+#---------------------------------------------------------------------------------------------------
+
+def generate_order_id():
+    # Generate a unique UUID for the order
+    order_uuid = str(uuid.uuid4()).replace('-', '')[:12]
+    # Get the current date/time in a string format
+    datetime_str = datetime.now().strftime('%Y%m%d%H%M%S')
+    # Combine the UUID and date/time to create the order ID
+    order_id = f'{datetime_str}{order_uuid}'
+    return order_id

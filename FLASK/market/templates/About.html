@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block title %} About {%endblock %}
+{% block content%}
+
+<div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-dark " style="color: white">
+    <div style="text-align: left; position: relative; left: 5px; top: 0px">
+
+        <h3 style="text-align: center;">Here are some Questions that will help you Know how to use this website</h3>
+        <br> <br>
+
+
+        <h4> <b>Q :</b> How to Order Food Using This Website?</h4>
+        <h6> <b> Ans :</b> Just open the website if you are not register then plz resister your self, or if you are
+            already register then login. From menu card select the item that you want. On the right hand side corner
+            your cart is there. place order from there also,You can remove the cart item from there</h6>
+        <br>
+        <h4><b>Q :</b> Is there Cash On Order Option is available ?</h4>
+        <h6><b> Ans :</b> Yes ! You Can Order Food with Cash on Order Option. Just Place the Order From the Website with
+            Cash on order Option. Once a Order is placed, go to canteen counter and pay there to successfully place the
+            Order (but currenty this feature is not available due to technical issue. we will get back soon with this
+            feature, sorry for your inconviniance)</h6>
+        <br>
+        <h4><b>Q :</b> Will my Order be Serve on my Table?</h4>
+        <h6><b> Ans :</b> No ! its a Self Service. You need to pick the order from the Court, when your Order will get
+            ready. Your username will be displayed on the order board when your order will be ready.</h6>
+        <br>
+        <h4><b>Q :</b> Is there is need to show my Order on court?</h4>
+        <h6><b> Ans :</b> No! You just need to tell the order id that will you get when you place the order successfully
+        </h6>
+        <br>
+        <a style=" text-align: center;" class="btn btn-info" href="{{ url_for('Menu_page') }}"">Order now</a>
+    </div>
+</div>
+
+{%endblock%}

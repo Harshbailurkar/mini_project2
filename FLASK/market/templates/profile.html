@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+Your Profile
+{% endblock %}
+{% block content %}
+
+<div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-dark" style="color:white">
+
+  <div style=" text-align: left; position:relative; left: 5px; top:0px">
+    <div style="text-align:center;"> logged in as:</div>
+    <h4 style="text-align: center;"> {{current_user.username}} </h4> <br><br>
+    <form>
+      <div class="form-row">
+        <div class="col">
+          <h6>Change UserName</h6>
+          <input type="text" class="form-control" placeholder="UserName">
+        </div>
+        <div class="col">
+          <h6>Change Passward</h6>
+          <input type="text" class="form-control" placeholder="New Passward">
+        </div>
+        <div class="col">
+
+          <h6>Upload a new profile Photo</h6>
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile02">
+              <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose
+                file</label>
+            </div>
+            <div class="input-group-append">
+              <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <h6>Add Mobile Number</h6>
+          <input type="text" id="contact_number" class="form-control" name="contact_number" placeholder="Contact Number"
+            required="">
+        </div>
+        <div class="col">
+          <h6>Add Email</h6>
+          <input type="email" id="contact_email" class="form-control" name="contact_email" placeholder="Contact Email"
+            required="">
+        </div>
+      </div>
+    </form>
+
+    <br><br><br>
+
+    <div style="text-align:center">
+      <input class="btn btn-primary" type="submit" />
+    </div>
+
+
+  </div>
+</div>
+{%endblock%}

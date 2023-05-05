@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+Payment
+{% endblock %}
+{% block content %}
+
+<div class="position-relative overflow-hidden p-1 p-md-5 m-md-3 text-center bg-dark" style="color:white">
+
+    <div style=" text-align: left; position:relative; left: 5px; top:0px">
+        <h5>UserName: {{current_user.username}}</h5>
+        <h5>Order id:<div style="display: inline; color: rgb(0, 255, 213)">  {{order_id}} </div>
+        </h5>
+        <br><br>
+        <h4 style="color: green;"> Your Order Has Sucessfully Placed. kindly wait For Few minutes Your Order is getting
+            ready!</h4>
+
+        <h6>
+            <div style="color: rgba(255, 255, 0, 0.611)">
+                Note that You have to tell the Order id give above to the Counter When you recive message of your order
+                id ready or Order completion message on the Order Board.
+                Thanks For Ordering And Trusting Us. <br>
+            </div>
+            If You Want You will Recieve Your Bill on your Email <a href="{{ url_for('profile_page') }}"> click here</a>
+            to Add Your Email. <br>
+            Visit Again!! <br>
+
+            To Order more click on Menu. <br><br> <a class="btn btn-info" href="{{ url_for('Menu_page') }}"">Menu</a>
+        </h6>
+    </div> 
+    
+    <table class=" table" style=" border: 2px solid white; border-collapse: collapse;">
+
+
+
+                </table>
+                <div class="product-device box-shadow d-none d-md-block"></div>
+                <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+    </div>
+
+    {%endblock%}

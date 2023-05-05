@@ -1,0 +1,68 @@
+<style>
+  .modal-content {
+    background-color: #212121
+  }
+</style>
+
+<!-- More Info -->
+<div class="modal fade" id="Modal-MoreInfo-{{ item.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">
+          <!-- -->
+          {{ item.name }}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ item.description }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="addrow" class="btn btn-outline-success"
+          onclick="selectRow(this.parentNode.parentNode)">Select</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Purchase Confirm -->
+<div class="modal fade" id="Modal-PurchaseConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">
+          Confirm Order !!
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          <h4 class="text-center">
+            Would You Like to order More? To order more press Cancle!
+          </h4>
+          <br>
+          <h6 class="text-center">
+            By clicking Order, you will redirect to payment.
+          </h6>
+          <h6 style="color: red;">note: we are currently facing issue with cash on order option. please kindly assist us
+            with online payment options </h6>
+          <br>
+          <a class="btn btn-success btn-block" href="{{ url_for('submit_order') }}">Order</a>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="font-weight: bold;">cancle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

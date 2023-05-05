@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %} Login Page {% endblock %} {% block
+    content %}
+    
+    <body class="text-center" style="
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));">
+        <br>
+        <br>
+        <br>
+        <div class="container"
+            style="background: rgb(238,174,202);
+        background: radial-gradient(circle, rgba(238,174,202,0.25262605042016806) 25%, rgba(48,51,55,0.7120098039215687) 100%); width: 35vw;">
+            <form method="POST" class="form-signin" style="color: white">
+                {{ form.hidden_tag() }} <br /><br />
+                <img class="mb-4" src="https://www.sitcoe.ac.in/images/logo.png" alt="SITCOE" />
+                <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
+                <br />
+                {{ form.username.label() }} <br />
+                {{ form.username(class="form-control", id="form2Example1",
+                placeholder="User Name",style="width:30vw; display: table-cell") }} <br />
+    
+                {{ form.password.label() }} <br />
+                {{ form.password(class="form-control" ,id="form2Example2",
+                placeholder="Password",style="width:30vw; display: table-cell") }} <br />
+    
+                <br />
+    
+                {{ form.submit(class="btn btn-lg btn-primary") }}
+                <br><br>
+            </form>
+        </div>
+    </body>
+    <br /><br /><br />
+    <br />
+    <br />
+    <br />
+    {% endblock %}

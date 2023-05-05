@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+<!--inherence by the base.html file -->
+{% block title%} menu page {%endblock%} {% block content%}
+
+<!-- <h3><b> menu </b></h3> -->
+<img src="https://www.milchbar.ch/img/stoerer@2/menu_en.png" alt="MENU" style=" width:120px; height:60px"><br><br>
+<input type="text" id="searchbar" oninput="search_menu()" placeholder="Search..."
+  style="border-radius: 10px; border: none; padding: 3px; width: 25vw;">
+<button style="background-color: rgb(204, 74, 74)">
+  <i class="fa fa-search" style="font-size: 18px"> </i>
+</button>
+<br />
+<br>
+<table class="table " id="table1"
+  style=" float: left; color: white; font-weight: bolder; width:70vw; background: rgba(0, 0, 0, 0.733);">
+  <thead style="background: rgba(209, 90, 5, 0.537);">
+    <tr>
+      <!-- Your Columns HERE -->
+      <th scope="col">ID</th>
+      <th scope="col">name</th>
+      <th scope="col">barcode</th>
+      <th scope="col">price</th>
+      <th scope="col"> Quantity</th>
+      <th scope="col">option</th>
+
+    </tr>
+  </thead>
+  <tbody style="color: white; font-weight: bold;">
+    <!-- Your rows inside the table HERE: -->
+    {% for item in items %}
+    {% include 'includes/items_modals.html'%}
+    <tr>
+      <td class="item">{{ item.id }}</td>
+      <td class="item">{{item.name}}</td>
+      <td class="item">{{item.barcode}}</td>
+      <td class="item">{{item.price }} &#8377</td>
+      <td class="item">
+        <input type="number" name="Quantity" id="quantity-{{ item.id }}" value="1" min="1" max="25"
+          oninput="validateQuantity(this)"
+          style=" text-align: center; width: 5vw; background-color: rgb(67, 65, 65); color: white ; border: none;" />
+      </td>
+      <td>
+        <button type="button" id="addrow" class="btn btn-success"
+          onclick="selectRow(this.parentNode.parentNode)">Select</button>
+
+        <button class="btn btn-outline-info" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">More
+          Info</button>
+      </td>
+    </tr>
+    {% endfor%}
+  </tbody>
+</table>
+
+
+<div id="block">
+  <form action="/submit" method="post">
+    <table id="table2" class="table" border="1" style="background-color: black; text-align: center; width:24vw;  position:fixed; right:0%; color: white; font-weight: bold; bottom: 0%;">
+        <thead style="background: rgba(217, 92, 14, 0.733);">
+            <tr>
+                <th colspan="4" style="background-color: rgb(250, 19, 27);"><b> Your Order</b></th>
+            </tr>
+            <br>
+            <tr>
+                <th>Name</th>
+                <th>quantity</th>
+                <th>price</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody id="table2-body">
+            <!-- Rows will be dynamically added here -->
+            <input type="hidden" name="order_item[]" value="{{ current_user.username }}">
+        </tbody>
+        <tfoot>
+            <tr class="total-row">
+                <td>Total Price:</td>
+                <input type="hidden" name="table2_total" id="table2_total_input">
+
+
+                <td colspan="3" name="table2_total" id="table2_total">0.0 &#8377;</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+
+                 <a id="save-button" class="btn btn-outline-success btn-block" onclick="chechTotal()" href="{{ url_for('submit_order') }}"> Order Now</a> 
+                </td>
+  
+        </tfoot>
+    </table>
+</form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------------------------
+document.getElementById("table2_total_input").value = total.toFixed(2);
+
+function(response) {
+  if (response.status === 200) {
+    window.location.href = "{{ url_for('success', order_id=order_id) }}";
+  } else {
+    alert("There was an error submitting the order.");
+  }
+}
+
+
+  function checkTotal() {
+    // Get the total price from the table
+    var total = parseFloat(document.getElementById("table2_total").innerText);
+
+    if (total === 0) {
+      
+      swal ( "Oops" ,  "Please select a item!" ,  "error" );
+      
+    }
+       
+      // Show modal if total is not 0
+      $('#Modal-PurchaseConfirm').modal('show'); // Replace with your actual modal ID
+    }
+  //----------------------------------------------------------------------------------------------------------
+  // function for adding rows for table2
+  function selectRow(row) {
+    // Get the data from the selected row
+    var name = row.cells[1].innerText;
+    var itemId = row.cells[0].innerText;
+    var quantity = document.getElementById('quantity-' + itemId).value; // Get quantity from input field
+    var price = row.cells[3].innerText;
+    var totalPrice = parseFloat(quantity) * parseFloat(price); // Calculate total price
+
+    // Create a new row in the second table
+    var newRow = document.createElement("tr");
+    newRow.innerHTML = "<td>" + name + "</td><td>" + quantity + "</td><td>" + totalPrice + " &#8377;</td><td>" + "<button onclick='removeRow(this)' class='btn btn-outline-danger'>Remove </button>" + "</td>";
+    document.getElementById("table2").appendChild(newRow);
+
+    // Update total price
+    var table2_total = parseFloat(document.getElementById("table2_total").innerText);
+    table2_total += totalPrice;
+    document.getElementById("table2_total").innerText = table2_total.toFixed(2) + " ₹";
+
+  }
+
+  //------------------------------------------------------------------------------------------------------------
+  // validation function for Quantity
+
+  function validateQuantity(input) {
+    if (input.value > 25) {
+      input.value = 25; // Set value to 25 if it's greater than 25
+    }
+    if (input.value < 1 || input.value === 0 || input.value === null) {
+      input.value = 1
+    }
+
+  }
+
+  //----------------------------------------------------------------------------------------------------------
+  // remove row function 
+
+  function removeRow(button) {
+
+    var row = button.parentNode.parentNode; // Get the parent row of the clicked button
+    var table2 = document.getElementById("table2"); // Get table2
+    var price = parseFloat(row.cells[2].innerText); // Get price from the row
+    var table2_total = parseFloat(document.getElementById("table2_total").innerText);
+    row.remove(); // Remove the row from the table
+    // Update total price with value to subtract price
+    table2_total = table2_total - price;
+    document.getElementById("table2_total").innerText = table2_total.toFixed(2) + " ₹";
+
+  }
+
+  //----------------------------------------------------------------------------------------------------------------------
+  // Search Function
+
+  function search_menu() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchbar");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("table1");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those that don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1]; // Column index of the name in the table
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+
+      }
+    }
+  }
+
+
+  // Retrieve order items and total amount
+  var orderItems = []; // Array of order items
+  var totalAmount = 0; // Total amount
+
+  // Populate order_item[] with order items data
+  // Assumes order items data is stored in an array called 'orderItems'
+  $('input[name="order_item[]"]').val(JSON.stringify(orderItems));
+
+  // Populate table2_total with total amount
+  $('input[name="table2_total"]').val(totalAmount);
+
+  // Submit the form
+  $('form').submit();
+
+//---------------------------------------------------------------------------------------------------------------  
+</script>
+{%endblock%}

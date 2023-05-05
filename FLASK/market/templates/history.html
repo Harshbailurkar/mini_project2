@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}
+
+Order History
+
+{%endblock %}
+{% block content %}
+<br>
+
+<div style="text-align: center;">
+
+  <h3
+    style="padding-top: 3px;padding-bottom:  3px; padding-left: 3px; padding-right: 3px; font-weight: bold; display: inline;background-color: black;">
+    Order History </h3>
+  <br>
+  <br>
+  <table class=" center table table-hover table-dark" style="width:80vw; ">
+    <thead>
+      <tr>
+        <!-- Your Columns HERE -->
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Total Price</th>
+        <th scope="col"> Date </th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Your rows inside the table HERE: -->
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <div id="message">
+    <h2 style="font-weight: bold; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">You have
+      not ordered yet ! 😕</h2>
+    <h5> To Order Click On Menu</h5>
+    <a class="btn btn-info" href="{{ url_for('Menu_page') }}"">Menu</a>
+    </div>
+    </div>
+ 
+    <style>
+        td {
+    height: 80px;
+    width: 160px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+  }
+  /* CSS animation for sliding in and out */
+  @keyframes slide-in {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
+
+  @keyframes slide-out {
+    from {
+      transform: translateY(0%);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+  /* Apply slide-in and slide-out animations to the message div */
+  #message {
+    animation: slide-in 0.5s ease-in-out, slide-out 0.5s ease-in-out 2s;
+  }
+    </style>
+
+<script>
+
+
+  $(document).ready(function () {
+    checkTableRows(); // Call checkTableRows() on page load
+  });
+
+  function checkTableRows() {
+    var numRows = $(" table tbody tr").length; if (numRows > 0) {
+      $("#message").hide(); // Hide the message if table has rows
+    } else {
+      $("#message").show(); // Show the message if table has no rows
+    }
+  }
+
+
+
+</script>
+      {%endblock%}
